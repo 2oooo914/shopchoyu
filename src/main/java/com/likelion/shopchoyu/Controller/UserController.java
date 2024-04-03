@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j //로그 출력을 도와주는 어노테이션
 @RestController
-@RequestMapping("/user") // uri가 http://~/user로 시작하는 요청을 받습니다.
+@RequestMapping("/user") // uri가 ~/user로 시작하는 요청을 받습니다.
 public class UserController {
 
     // 1. 사용자를 생성하는 컨트롤러를 만듭니다.
