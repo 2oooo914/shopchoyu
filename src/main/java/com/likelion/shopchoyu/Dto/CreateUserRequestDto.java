@@ -1,5 +1,6 @@
 package com.likelion.shopchoyu.Dto;
 
+import com.likelion.shopchoyu.Entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,17 @@ public class CreateUserRequestDto {
     public String password;
 
     public String address;
+
+    //클래스의 인스턴스 변수들을 사용하여 Order 엔티티의 인스턴스를 생성하고 반환하는 역할
+    //생성(Create) 작업에서는 toEntity() 메서드를 통해 DTO의 모든 정보를 새 엔티티 객체에 매핑
+    public User toEntity(){
+        return User.builder()
+                .name(name)
+                .userId(id)
+                .password(password)
+                .address(address)
+                .build();
+
+    }
 
 }
