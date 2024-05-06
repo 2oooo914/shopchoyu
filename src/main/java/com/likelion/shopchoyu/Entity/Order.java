@@ -20,13 +20,17 @@ public class Order {
     private Long id;
 
     @Column
-    public String name;
+    private String name;
 
     @Column
-    public int quantity;
+    private int quantity;
 
     @Column
-    public int price;
+    private int price;
+
+    //Order : User = N : 1
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     //제어와 유지보수에 용이하기 위해 Setter를 사용하지 않는다
     public void update(UpdateOrderRequestDto orderRequestDto) { // Order Entity의 정보를 업데이트
@@ -34,4 +38,8 @@ public class Order {
         quantity = orderRequestDto.getQuantity();
         price = orderRequestDto.getPrice();
     } //Dto 값을 Order Entity의 해당 필드에 할당 -> 새로운 값으로 업데이트
+
+    public void setUser(User user){
+        this.user = user;
+    }
 }

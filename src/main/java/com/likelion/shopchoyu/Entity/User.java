@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -19,19 +20,24 @@ public class User {
 
     @Id //각각의 객체를 구별
     @GeneratedValue(strategy = GenerationType.AUTO) //1부터 id값 하나씩 증가
+    @Column
     private Long id;
 
     @Column
-    public String name;
+    private String name;
 
     @Column
-    public String userId;
+    private String userId;
 
     @Column
-    public String password;
+    private String password;
 
     @Column
-    public String address;
+    private String address;
+
+    @Column
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Order> orderList;
 
     //제어와 유지보수에 용이하기 위해 Setter를 사용하지 않는다
     public void update(UpdateUserRequestDto userRequestDto) { // User Entity의 정보를 업데이트
