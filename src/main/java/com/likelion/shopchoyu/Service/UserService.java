@@ -53,7 +53,6 @@ public class UserService {
         }
     }
 
-    @Transactional //데이터 변경이 일어나므로, 클래스 레벨에서 설정한 readOnly=true를 오버라이드
     public UserResponseDto updateUser(Long userId, UpdateUserRequestDto updateUserRequestDto){
         //DB에서 가져오기
         try{

@@ -32,7 +32,7 @@ public class OrderService {
         List<OrderResponseDto> result = new ArrayList<>();
         createOrderRequestDtoList.forEach(createOrderRequestDto -> {
             Order order = createOrderRequestDto.toEntity();
-            Optional<User> userId = userRepository.findById(createOrderRequestDto.getUser().getId());
+            Optional<User> userId = userRepository.findById(createOrderRequestDto.getUser().getUserId());
             if(userId.isPresent()){
                 User findUser = userId.get();
                 order.setUser(findUser);

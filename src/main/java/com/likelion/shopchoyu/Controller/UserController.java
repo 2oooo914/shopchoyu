@@ -44,7 +44,7 @@ public class UserController {
     public ResponseEntity<?> updateUser(@PathVariable Long userId, UpdateUserRequestDto userUpdate){
         UserResponseDto responseDto = userService.updateUser(userId, userUpdate);
         if (responseDto != null){
-            return ResponseEntity.status(HttpStatus.OK).body("사용자 수정 완료");
+            return ResponseEntity.status(HttpStatus.OK).body(responseDto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("사용자 수정 실패");
         }
