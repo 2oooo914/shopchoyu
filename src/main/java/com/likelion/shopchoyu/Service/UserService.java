@@ -24,13 +24,15 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void createUser(CreateUserRequestDto createUserRequestDto){
-        User user = createUserRequestDto.toEntity();
+    public UserResponseDto createUser(CreateUserRequestDto createUserRequestDto){
+        User user = createUserRequestDto.toEntity(); //Dto를 Entity로 변환
         try{
-            user = userRepository.save(user);
+            user = userRepository.save(user); //사용자 저장
+            return UserResponseDto.from(user);
         } catch (Exception e){
             log.error("{} 저장 실패", user.getUserId(), e);
         }
+        return null;
     }
 
     public UserResponseDto getUser(Long userId) {
@@ -39,33 +41,43 @@ public class UserService {
             Optional<User> user = userRepository.findById(userId);
             if(user.isPresent()){ //존재 하면
                 User findUser = user.get();
-                return UserResponseDto.from(findUser);
+                return UserResponseDto.from(findUser); //UserResponseDto로 변환하여 반환
+            } else{
+                // 사용자가 없을 경우
+                log.info("사용자가 존재하지 않음: {}", userId);
+                return null;
             }
-        }catch (Exception e){
+        } catch (Exception e){
             log.error("{} 사용자 가져오기 실패", userId, e);
+            return null;
         }
-        return null;
     }
 
     @Transactional //데이터 변경이 일어나므로, 클래스 레벨에서 설정한 readOnly=true를 오버라이드
-    public void updateUser(Long userId, UpdateUserRequestDto updateUserRequestDto){
+    public UserResponseDto updateUser(Long userId, UpdateUserRequestDto updateUserRequestDto){
         //DB에서 가져오기
         try{
             Optional<User> user = userRepository.findById(userId);
-            if(user.isPresent()){ //존재 하면
+            if(user.isPresent()){ //조회한 후 존재하면
                 User findUser = user.get();
-                findUser.update(updateUserRequestDto);
-                userRepository.save(findUser);
+                findUser.update(updateUserRequestDto); //사용자 정보를 업데이트
+                User updateUser = userRepository.save(findUser);
+                return UserResponseDto.from(updateUser); // 수정된 사용자 정보를 반환
+            } else {
+                // 사용자가 없을 경우
+                log.info("{} 사용자가 존재하지 않음", userId);
+                return null;
             }
         } catch (Exception e){
             log.error("{} 사용자 수정 실패", userId, e);
+            return null;
         }
     }
 
     public void deleteUser(Long userId){
         try{
             userRepository.deleteById(userId);
-        }catch (Exception e){
+        } catch (Exception e){
             log.error("{} 사용자 삭제 실패", userId, e);
         }
 

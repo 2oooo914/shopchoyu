@@ -29,6 +29,7 @@ public class Order {
     private int price;
 
     //Order : User = N : 1
+    //주문과 사용자 사이의 N:1 관계를 설정하고, 필요할 때만 관련 사용자 정보를 불러옴
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
@@ -39,6 +40,7 @@ public class Order {
         price = orderRequestDto.getPrice();
     } //Dto 값을 Order Entity의 해당 필드에 할당 -> 새로운 값으로 업데이트
 
+    //주문에 사용자 할당, 관계를 설정한다
     public void setUser(User user){
         this.user = user;
     }

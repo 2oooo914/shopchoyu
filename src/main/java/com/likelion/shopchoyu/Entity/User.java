@@ -43,5 +43,7 @@ public class User {
     public void update(UpdateUserRequestDto userRequestDto) { // User Entity의 정보를 업데이트
         name = userRequestDto.getName();
         address = userRequestDto.getAddress();
-    } //Dto 값을 User Entity의 해당 필드에 할당 -> 새로운 값으로 업데이트
+    }
+    //Dto 값을 User Entity의 해당 필드에 할당 -> 새로운 값으로 업데이트
+    // UpdateUserRequestDto 객체로부터 받은 값으로 name, address 필드를 업데이트
 }
