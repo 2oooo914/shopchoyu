@@ -1,6 +1,6 @@
-package com.likelion.shopchoyu.Entity;
+package com.likelion.shopchoyu.entity;
 
-import com.likelion.shopchoyu.Dto.UpdateOrderRequestDto;
+import com.likelion.shopchoyu.dto.request.UpdateOrderRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
-package com.likelion.shopchoyu.Dto;
+package com.likelion.shopchoyu.dto.request;
 
-import com.likelion.shopchoyu.Entity.Order;
-import com.likelion.shopchoyu.Entity.User;
+import com.likelion.shopchoyu.entity.Order;
+import com.likelion.shopchoyu.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

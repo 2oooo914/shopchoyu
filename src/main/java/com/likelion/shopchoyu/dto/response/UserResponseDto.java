@@ -1,6 +1,6 @@
-package com.likelion.shopchoyu.Dto;
+package com.likelion.shopchoyu.dto.response;
 
-        import com.likelion.shopchoyu.Entity.User;
+        import com.likelion.shopchoyu.entity.User;
         import lombok.AllArgsConstructor;
         import lombok.Builder;
         import lombok.Getter;

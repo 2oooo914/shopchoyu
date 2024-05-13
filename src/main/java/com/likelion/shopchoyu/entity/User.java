@@ -1,7 +1,6 @@
-package com.likelion.shopchoyu.Entity;
+package com.likelion.shopchoyu.entity;
 
-import com.likelion.shopchoyu.Dto.UpdateOrderRequestDto;
-import com.likelion.shopchoyu.Dto.UpdateUserRequestDto;
+import com.likelion.shopchoyu.dto.request.UpdateUserRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,13 +26,16 @@ public class User {
     private String name;
 
     @Column(name = "id", nullable = false)
-    private String id;
+    private String email;
 
     @Column(name = "password")
     private String password;
 
     @Column(name = "address")
     private String address;
+
+    @Column
+    private String roles;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Order> orderList;

@@ -1,12 +1,12 @@
-package com.likelion.shopchoyu.Service;
+package com.likelion.shopchoyu.service;
 
-import com.likelion.shopchoyu.Dto.CreateOrderRequestDto;
-import com.likelion.shopchoyu.Dto.UpdateOrderRequestDto;
-import com.likelion.shopchoyu.Dto.OrderResponseDto;
-import com.likelion.shopchoyu.Entity.Order;
-import com.likelion.shopchoyu.Entity.User;
-import com.likelion.shopchoyu.Repository.OrderRepository;
-import com.likelion.shopchoyu.Repository.UserRepository;
+import com.likelion.shopchoyu.dto.request.CreateOrderRequestDto;
+import com.likelion.shopchoyu.dto.request.UpdateOrderRequestDto;
+import com.likelion.shopchoyu.dto.response.OrderResponseDto;
+import com.likelion.shopchoyu.entity.Order;
+import com.likelion.shopchoyu.entity.User;
+import com.likelion.shopchoyu.repository.OrderRepository;
+import com.likelion.shopchoyu.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

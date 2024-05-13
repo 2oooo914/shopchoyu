@@ -1,17 +1,14 @@
-package com.likelion.shopchoyu.Controller;
+package com.likelion.shopchoyu.controller;
 
-import com.likelion.shopchoyu.Dto.CreateUserRequestDto;
-import com.likelion.shopchoyu.Dto.OrderResponseDto;
-import com.likelion.shopchoyu.Dto.UpdateUserRequestDto;
-import com.likelion.shopchoyu.Dto.UserResponseDto;
-import com.likelion.shopchoyu.Service.UserService;
+import com.likelion.shopchoyu.dto.request.CreateUserRequestDto;
+import com.likelion.shopchoyu.dto.request.UpdateUserRequestDto;
+import com.likelion.shopchoyu.dto.response.UserResponseDto;
+import com.likelion.shopchoyu.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j //로그 출력을 도와주는 어노테이션
 @RestController

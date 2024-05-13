@@ -1,9 +1,9 @@
-package com.likelion.shopchoyu.Controller;
+package com.likelion.shopchoyu.controller;
 
-import  com.likelion.shopchoyu.Dto.CreateOrderRequestDto;
-import com.likelion.shopchoyu.Dto.OrderResponseDto;
-import  com.likelion.shopchoyu.Dto.UpdateOrderRequestDto;
-import com.likelion.shopchoyu.Service.OrderService;
+import com.likelion.shopchoyu.dto.request.CreateOrderRequestDto;
+import com.likelion.shopchoyu.dto.response.OrderResponseDto;
+import com.likelion.shopchoyu.dto.request.UpdateOrderRequestDto;
+import com.likelion.shopchoyu.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
