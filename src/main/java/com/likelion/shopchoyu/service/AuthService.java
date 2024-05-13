@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class AuthService {
+    //JWT를 사용한 인증 시스템에서 토큰 재발급 로직을 처리
 
     private final JwtUtil jwtUtil;
     private final TokenRepository tokenRepository;
@@ -19,6 +20,7 @@ public class AuthService {
     public JwtDto reissueToken(JwtDto jwtDto) {
 
         log.info("[ Auth Service ] 토큰 재발급을 시작합니다.");
+        //인자로 받은 JwtDto에서 토큰 추출
         String accessToken = jwtDto.getAccessToken();
         String refreshToken = jwtDto.getRefreshToken();
 

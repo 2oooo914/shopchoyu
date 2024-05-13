@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration // 빈 등록
 @EnableWebSecurity // 필터 체인 관리 시작 어노테이션
-@RequiredArgsConstructor
+@RequiredArgsConstructor // final이나 @NonNull 필드에 대한 생성자를 자동으로 생성
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
@@ -31,9 +31,10 @@ public class SecurityConfig {
             "/login", //로그인은 인증이 필요하지 않음
             "/user/create", //회원가입은 인증이 필요하지 않음
             "/auth/reissue", //토큰 재발급은 인증이 필요하지 않음
-            "/auth/**"
+            "/auth/**" // /auth로 시작하는 모든 경로는 인증이 필요하지 않음
     };
 
+    // Bean 등록
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();

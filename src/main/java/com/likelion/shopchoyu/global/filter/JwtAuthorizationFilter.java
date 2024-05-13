@@ -35,6 +35,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         try {
             //Request 에서 access token 추출
+            //요청에서 JWT 액세스 토큰을 추출, 토큰이 존재하지 않거나, 로그아웃 처리된 토큰인 경우 필터 처리를 건너뛰고 다음 필터로 넘어감
             String accessToken = jwtUtil.resolveAccessToken(request);
 
             // accessToken 없이 접근할 경우 필터를 건너뜀
@@ -69,8 +70,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         jwtUtil.validateToken(accessToken);
         log.info("[ JwtAuthorizationFilter ] Access Token 유효성 검증 성공. ");
 
-        //CustomUserDetail 객체 생성
+        //CustomUserDetail 객체 생성, Spring Security에서 사용자의 인증 정보
         CustomUserDetails userDetails = new CustomUserDetails(
+                //토큰에서 사용자 정보(이메일, 역할 등)를 추출하여 CustomUserDetails 객체 생성
                 jwtUtil.getEmail(accessToken),
                 null,
                 jwtUtil.getRoles(accessToken)
@@ -78,13 +80,13 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         log.info("[ JwtAuthorizationFilter ] UserDetails 객체 생성 성공");
 
-        // Spring Security 인증 토큰 생성
+        // Spring Security 인증 토큰 생성해서 SecurityContextHolder의 인증 객체로 설정
         Authentication authToken = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 null,
                 userDetails.getAuthorities());
 
-        // SecurityContextHolder 에 현재 인증 객체 저장
+        // SecurityContextHolder 에 현재 인증 객체 저장하여 인증 되었음을 알림
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
         log.info("[ JwtAuthorizationFilter ] 인증 객체 저장 완료");
