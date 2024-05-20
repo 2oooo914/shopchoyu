@@ -1,17 +1,16 @@
-package com.likelion.shopchoyu.Controller;
+package com.likelion.shopchoyu.controller;
 
-import com.likelion.shopchoyu.Dto.CreateUserRequestDto;
-import com.likelion.shopchoyu.Dto.OrderResponseDto;
-import com.likelion.shopchoyu.Dto.UpdateUserRequestDto;
-import com.likelion.shopchoyu.Dto.UserResponseDto;
-import com.likelion.shopchoyu.Service.UserService;
+import com.likelion.shopchoyu.dto.request.CreateUserRequestDto;
+import com.likelion.shopchoyu.dto.request.UpdateUserRequestDto;
+import com.likelion.shopchoyu.dto.response.UserResponseDto;
+import com.likelion.shopchoyu.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j //로그 출력을 도와주는 어노테이션
 @RestController
@@ -28,21 +27,16 @@ public class UserController {
     }
 
     // 2. 사용자를 조회하는 컨트롤러를 만듭니다. return 값은 "사용자 조회"입니다.
-    @GetMapping("/{userId}")
-    public ResponseEntity<?> getUser(@PathVariable Long userId){
-        UserResponseDto responseDto = userService.getUser(userId);
-        if (responseDto != null) {
-            return ResponseEntity.ok(responseDto);
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("사용자를 찾을 수 없습니다.");
-        }
+    @GetMapping("")
+    public ResponseEntity<?> getUser(@AuthenticationPrincipal UserDetails userDetails){
+        log.info("User Email ---> {}", userDetails.getUsername());
+        return ResponseEntity.ok(userService.getUser(userDetails.getUsername()));
     }
 
     // 3. 사용자를 수정하는 컨트롤러를 만듭니다. return 값은 "사용자 수정"입니다.
-    @PutMapping("/{userId}")
-    public ResponseEntity<?> updateUser(@PathVariable Long userId, UpdateUserRequestDto userUpdate){
-        UserResponseDto responseDto = userService.updateUser(userId, userUpdate);
+    @PutMapping("")
+    public ResponseEntity<?> updateUser(@AuthenticationPrincipal UserDetails userDetails, UpdateUserRequestDto userUpdate){
+        UserResponseDto responseDto = userService.updateUser(userDetails.getUsername(), userUpdate);
         if (responseDto != null){
             return ResponseEntity.status(HttpStatus.OK).body(responseDto);
         } else {
@@ -51,9 +45,9 @@ public class UserController {
     }
 
     // 4. 사용자를 삭제하는 컨트롤러를 만듭니다. return 값은 "사용자 삭제"입니다.
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<?> DeleteUser(@RequestParam long userId){
-        userService.deleteUser(userId);
+    @DeleteMapping("")
+    public ResponseEntity<?> DeleteUser(@AuthenticationPrincipal UserDetails userDetails){
+        userService.deleteUser(userDetails.getUsername());
         return ResponseEntity.noContent().build();
     }
 

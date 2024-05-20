@@ -1,7 +1,6 @@
-package com.likelion.shopchoyu.Entity;
+package com.likelion.shopchoyu.entity;
 
-import com.likelion.shopchoyu.Dto.UpdateOrderRequestDto;
-import com.likelion.shopchoyu.Dto.UpdateUserRequestDto;
+import com.likelion.shopchoyu.dto.request.UpdateUserRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,21 +18,24 @@ import java.util.List;
 public class User {
 
     @Id //각각의 객체를 구별
-    @GeneratedValue(strategy = GenerationType.AUTO) //1부터 id값 하나씩 증가
-    @Column(name = "userId")
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //1부터 id값 하나씩 증가
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "id", nullable = false)
-    private String id;
+    @Column(name = "userId", nullable = false)
+    private String email;
 
     @Column(name = "password")
     private String password;
 
     @Column(name = "address")
     private String address;
+
+    @Column
+    private String roles;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Order> orderList;

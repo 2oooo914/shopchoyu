@@ -1,6 +1,6 @@
-package com.likelion.shopchoyu.Entity;
+package com.likelion.shopchoyu.entity;
 
-import com.likelion.shopchoyu.Dto.UpdateOrderRequestDto;
+import com.likelion.shopchoyu.dto.request.UpdateOrderRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,9 +37,9 @@ public class Order {
 
     //제어와 유지보수에 용이하기 위해 Setter를 사용하지 않는다
     public void update(UpdateOrderRequestDto orderRequestDto) { // Order Entity의 정보를 업데이트
-        this.name = orderRequestDto.getName();
-        this.quantity = orderRequestDto.getQuantity();
-        this.price = orderRequestDto.getPrice();
+        name = orderRequestDto.getName();
+        quantity = orderRequestDto.getQuantity();
+        price = orderRequestDto.getPrice();
     } //Dto 값을 Order Entity의 해당 필드에 할당 -> 새로운 값으로 업데이트
 
     //주문에 사용자 할당, 관계를 설정한다
