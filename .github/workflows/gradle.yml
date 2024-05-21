@@ -21,11 +21,11 @@ jobs:
           distribution: 'temurin'
 
       #Setting yml
-      - name: make application.yml
+      - name: Set YML
         run: |
-         cd ./src/main/resources
-         touch ./application.yml
-         echo "${{ secrets.APPLICATION_YML }}" > ./application.yml
+          mkdir -p src/main/resources
+          echo "${{ secrets.APPLICATION_YML }}"  > src/main/resources/application.yml
+          find src
 
       #gradlew chmod
       - name: Grant execute permission for gradlew
